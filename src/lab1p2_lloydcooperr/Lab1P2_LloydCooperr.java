@@ -35,14 +35,11 @@ public class Lab1P2_LloydCooperr {
                         int desplazamiento = 200;
                         int iteraciones = 100;
                         
-                        int x0Izquierda = -desplazamiento;
-                        int x0Derecha = desplazamiento;
-                        
-                        double raizIzquierda = newtonRaphson(a, b, c,x0Izquierda, iteraciones);
-                        double raizDerecha = newtonRaphson(a,b,c, x0Derecha, iteraciones);
-                        
-                        System.out.println("Ejecución 1: x0 = " + x0Izquierda + ", raíz encontrada: " + raizIzquierda);
-                        System.out.println("Ejecución 2: x0 = " + x0Derecha + ", raíz encontrada: " + raizDerecha);
+                        double[] raices = metodoDelVertice(a, b, c, desplazamiento, iteraciones);
+
+                        System.out.println("Vértice: (" + vertice(a, b, c)[0] + ", " + vertice(a, b, c)[1] + ")");
+                        System.out.println("Raíz izquierda: " + raices[0]);
+                        System.out.println("Raíz derecha: " + raices[1]);
                         System.out.println("Iteraciones: " + iteraciones);
                         break;
                     case 2:
@@ -85,7 +82,23 @@ public class Lab1P2_LloydCooperr {
     public static double fPrima(int x, int a, int b) {
         return 2 * a * x + b;
     }
+     
+    private static double[] vertice(int a, int b, int c) {
+        double xVertice = -(b) / (2.0 * a);
+        double yVertice = f((int) xVertice, a, b, c);
+        return new double[]{xVertice, yVertice};
+    }
 
+    // Método del vértice para encontrar las raíces
+    private static double[] metodoDelVertice(int a, int b, int c, double desplazamiento, int iteraciones) {
+        double[] vertice = vertice(a, b, c);
+        double x0Izquierda = vertice[0] - desplazamiento;
+        double x0Derecha = vertice[0] + desplazamiento;
+        double raizIzquierda = newtonRaphson(a, b, c, (int) x0Izquierda, iteraciones);
+        double raizDerecha = newtonRaphson(a, b, c, (int) x0Derecha, iteraciones);
+        return new double[]{raizIzquierda, raizDerecha};
+    }
+    
     public static int newtonRaphson(int a, int b, int c, int x, int iteraciones) {
         if (iteraciones == 0) {
             return x;

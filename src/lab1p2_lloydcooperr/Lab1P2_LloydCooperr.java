@@ -58,9 +58,17 @@ public class Lab1P2_LloydCooperr {
                         double coseno = cosenoTaylor(xRadianes, n);
                         double tangente = tangenteTaylor(xRadianes, n);
 
-                        System.out.println("Seno(" + x + "°) = " + seno);
-                        System.out.println("Coseno(" + x + "°) = " + coseno);
-                        System.out.println("Tangente(" + x + "°) = " + tangente);
+                        if (x < 90) {
+                            System.out.println("Seno(" + x + "°) = " + seno);
+                            System.out.println("Coseno(" + x + "°) = " + coseno);
+                            System.out.println("El valor no puede ser calculado");
+                            break;
+                            
+                        } else {
+                            System.out.println("Seno(" + x + "°) = " + seno);
+                            System.out.println("Coseno(" + x + "°) = " + coseno);
+                            System.out.println("Tangente(" + x + "°) = " + tangente);  
+                        }
                         break;
                     case 3:
                         System.out.println("Adios");
@@ -110,10 +118,11 @@ public class Lab1P2_LloydCooperr {
     }
 
     private static double tangenteTaylor(double x, int n) {
+        
         if (n == 1) {
             return x;
         } else {
-            double termino = (2 * n * Math.pow(-4, n) * (1 - Math.pow(4, n))) / factorial(2 * n - 1);
+            double termino = (x * 2 * n * Math.pow(-4, n) * (1 - Math.pow(4, n))) / factorial(2 * n - 1);
             return termino * Math.pow(x, 2 * n - 1) + tangenteTaylor(x, n - 1);
         }
     }

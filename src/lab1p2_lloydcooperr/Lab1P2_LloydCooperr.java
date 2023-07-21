@@ -12,6 +12,7 @@ public class Lab1P2_LloydCooperr {
                 System.out.println("----MENU----");
                 System.out.println("1. Aproximacion de ceros");
                 System.out.println("2. Serie de Taylor");
+                System.out.println("3. Salida");
                 System.out.println("Seleccione una opcion: ");
                 
                 opcion = read.nextInt();
@@ -27,7 +28,7 @@ public class Lab1P2_LloydCooperr {
                         break;
                     default:
                 }
-            } while (opcion != 4);
+            } while (opcion != 3);
     }
     
 }

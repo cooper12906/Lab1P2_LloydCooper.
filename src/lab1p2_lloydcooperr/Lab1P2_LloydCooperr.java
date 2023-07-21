@@ -117,12 +117,11 @@ public class Lab1P2_LloydCooperr {
         }
     }
 
-    private static double tangenteTaylor(double x, int n) {
-        
+    private static double tangenteTaylor(double x, int n) { 
         if (n == 1) {
             return x;
         } else {
-            double termino = (x * 2 * n * Math.pow(-4, n) * (1 - Math.pow(4, n))) / factorial(2 * n - 1);
+            double termino = (Math.pow(-4, n) * (1 - Math.pow(4, n))) / factorial(2 * n - 1);
             return termino * Math.pow(x, 2 * n - 1) + tangenteTaylor(x, n - 1);
         }
     }

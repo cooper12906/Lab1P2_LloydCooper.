@@ -46,16 +46,21 @@ public class Lab1P2_LloydCooperr {
                         System.out.println("Iteraciones: " + iteraciones);
                         break;
                     case 2:
-                        System.out.println("Ingrese el valor de 'x' ");
+                        System.out.print("Ingrese el valor de x en grados: ");
                         double x = read.nextDouble();
 
-                        double senoAproximado = senoTaylor(x);
-                        double cosenoAproximado = cosenoTaylor(x);
-                        double tangenteAproximada = tangenteTaylor(x);
+                        System.out.print("Ingrese el límite de la sumatoria (n): ");
+                        int n = read.nextInt();
+                        
+                        double xRadianes = Math.toRadians(x);
 
-                        System.out.println("sen(" + x + ") = " + senoAproximado);
-                        System.out.println("cos(" + x + ") = " + cosenoAproximado);
-                        System.out.println("tan(" + x + ") = " + tangenteAproximada);
+                        double seno = senoTaylor(xRadianes, n);
+                        double coseno = cosenoTaylor(xRadianes, n);
+                        double tangente = tangenteTaylor(xRadianes, n);
+
+                        System.out.println("Seno(" + x + "°) = " + seno);
+                        System.out.println("Coseno(" + x + "°) = " + coseno);
+                        System.out.println("Tangente(" + x + "°) = " + tangente);
                         break;
                     case 3:
                         System.out.println("Adios");
@@ -84,39 +89,33 @@ public class Lab1P2_LloydCooperr {
         }
     }
     
-    
-     public static double senoTaylor(double x) {
-        double result = 0;
-        double term = x;
-        int n = 1;
-
-        while (Math.abs(term) >= 1e-8) {
-            result += term;
-            term = -term * x * x / ((2 * n) * (2 * n + 1));
-            n++;
+    private static double senoTaylor(double x, int n) {
+        if (n == 0) {
+            return x;
+        } else {
+            double signo = (n % 2 == 0) ? -1 : 1;
+            double termino = Math.pow(x, 2 * n + 1) / factorial(2 * n + 1);
+            return signo * termino + senoTaylor(x, n - 1);
         }
-
-        return result;
     }
 
-    public static double cosenoTaylor(double x) {
-        double result = 1;
-        double term = 1;
-        int n = 1;
-
-        while (Math.abs(term) >= 1e-8) {
-            result += term;
-            term = -term * x * x / ((2 * n - 1) * (2 * n));
-            n++;
+    private static double cosenoTaylor(double x, int n) {
+        if (n == 0) {
+            return 1;
+        } else {
+            double signo = (n % 2 == 0) ? 1 : -1;
+            double termino = Math.pow(x, 2 * n) / factorial(2 * n);
+            return signo * termino + cosenoTaylor(x, n - 1);
         }
-
-        return result;
     }
 
-    public static double tangenteTaylor(double x) {
-        double sen_x = senoTaylor(x);
-        double cos_x = cosenoTaylor(x);
-        return sen_x / cos_x;
+    private static double tangenteTaylor(double x, int n) {
+        if (n == 1) {
+            return x;
+        } else {
+            double termino = (2 * n * Math.pow(-4, n) * (1 - Math.pow(4, n))) / factorial(2 * n - 1);
+            return termino * Math.pow(x, 2 * n - 1) + tangenteTaylor(x, n - 1);
+        }
     }
     
     public static double factorial(int n) {

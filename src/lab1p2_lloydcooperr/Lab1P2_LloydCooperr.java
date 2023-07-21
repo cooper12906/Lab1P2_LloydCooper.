@@ -9,12 +9,13 @@ public class Lab1P2_LloydCooperr {
     public static void main(String[] args) {
         int opcion = 0;
             do {
-                System.out.println("----MENU----");
+                System.out.println("-------------------MENU-------------------");
                 System.out.println("1. Aproximacion de ceros (Newton Raphson)");
                 System.out.println("2. Serie de Taylor");
                 System.out.println("3. Salida");
+                System.out.println("------------------------------------------");
                 System.out.println("Seleccione una opcion: ");
-                
+  
                 opcion = read.nextInt();
                 switch (opcion){
                     case 1:
@@ -42,10 +43,19 @@ public class Lab1P2_LloydCooperr {
                         
                         System.out.println("Ejecución 1: x0 = " + x0Izquierda + ", raíz encontrada: " + raizIzquierda);
                         System.out.println("Ejecución 2: x0 = " + x0Derecha + ", raíz encontrada: " + raizDerecha);
-                        System.out.println("iteraciones" + iteraciones);
+                        System.out.println("Iteraciones: " + iteraciones);
                         break;
                     case 2:
-                        
+                        System.out.println("Ingrese el valor de 'x' ");
+                        double x = read.nextDouble();
+
+                        double sen_aprox = senoTaylor(x);
+                        double cos_aprox = cosenoTaylor(x);
+                        double tan_aprox = tangenteTaylor(x);
+
+                        System.out.println("sen(" + x + ") = " + senoAproximado);
+                        System.out.println("cos(" + x + ") = " + cosenoAproximado);
+                        System.out.println("tan(" + x + ") = " + tangenteAproximada);
                         break;
                     case 3:
                         System.out.println("Adios");

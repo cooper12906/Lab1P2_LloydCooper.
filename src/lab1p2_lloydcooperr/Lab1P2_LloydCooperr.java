@@ -1,20 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package lab1p2_lloydcooperr;
 
-/**
- *
- * @author CUSTOMER PC
- */
+import java.util.*;
+
 public class Lab1P2_LloydCooperr {
 
-    /**
-     * @param args the command line arguments
-     */
+    static Scanner read = new Scanner(System.in);
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        int opcion = 0;
+            do {
+                System.out.println("----MENU----");
+                System.out.println("1. Aproximacion de ceros");
+                System.out.println("2. Serie de Taylor");
+                System.out.println("Seleccione una opcion: ");
+                
+                opcion = read.nextInt();
+                switch (opcion){
+                    case 1:
+                        
+                        break;
+                    case 2:
+                        
+                        break;
+                    case 3:
+                        System.out.println("Adios");
+                        break;
+                    default:
+                }
+            } while (opcion != 4);
     }
     
 }

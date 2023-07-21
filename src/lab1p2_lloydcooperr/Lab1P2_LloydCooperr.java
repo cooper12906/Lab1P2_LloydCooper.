@@ -49,9 +49,9 @@ public class Lab1P2_LloydCooperr {
                         System.out.println("Ingrese el valor de 'x' ");
                         double x = read.nextDouble();
 
-                        double sen_aprox = senoTaylor(x);
-                        double cos_aprox = cosenoTaylor(x);
-                        double tan_aprox = tangenteTaylor(x);
+                        double senoAproximado = senoTaylor(x);
+                        double cosenoAproximado = cosenoTaylor(x);
+                        double tangenteAproximada = tangenteTaylor(x);
 
                         System.out.println("sen(" + x + ") = " + senoAproximado);
                         System.out.println("cos(" + x + ") = " + cosenoAproximado);
@@ -81,6 +81,49 @@ public class Lab1P2_LloydCooperr {
             double fpx = fPrima(x, a, b);
             double newX = x - fx / fpx;
             return newtonRaphson(a, b, c, (int) newX, iteraciones - 1);
+        }
+    }
+    
+    
+     public static double senoTaylor(double x) {
+        double result = 0;
+        double term = x;
+        int n = 1;
+
+        while (Math.abs(term) >= 1e-8) {
+            result += term;
+            term = -term * x * x / ((2 * n) * (2 * n + 1));
+            n++;
+        }
+
+        return result;
+    }
+
+    public static double cosenoTaylor(double x) {
+        double result = 1;
+        double term = 1;
+        int n = 1;
+
+        while (Math.abs(term) >= 1e-8) {
+            result += term;
+            term = -term * x * x / ((2 * n - 1) * (2 * n));
+            n++;
+        }
+
+        return result;
+    }
+
+    public static double tangenteTaylor(double x) {
+        double sen_x = senoTaylor(x);
+        double cos_x = cosenoTaylor(x);
+        return sen_x / cos_x;
+    }
+    
+    public static double factorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
         }
     }
 }

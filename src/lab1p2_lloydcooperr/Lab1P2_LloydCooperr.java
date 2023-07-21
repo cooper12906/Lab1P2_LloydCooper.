@@ -35,7 +35,7 @@ public class Lab1P2_LloydCooperr {
                         int desplazamiento = 200;
                         int iteraciones = 100;
                         
-                        double[] raices = metodoDelVertice(a, b, c, desplazamiento, iteraciones);
+                        double[] raices = metodoVertice(a, b, c, desplazamiento, iteraciones);
 
                         System.out.println("Vértice: (" + vertice(a, b, c)[0] + ", " + vertice(a, b, c)[1] + ")");
                         System.out.println("Raíz izquierda: " + raices[0]);
@@ -75,22 +75,21 @@ public class Lab1P2_LloydCooperr {
             } while (opcion != 3);
     }
     
-    public static double f(int x, int a, int b, int c) {
+    public static double f(double x, int a, int b, int c) {
         return a * x * x + b * x + c;
     }
 
-    public static double fPrima(int x, int a, int b) {
+    public static double fPrima(double x, int a, int b) {
         return 2 * a * x + b;
     }
      
     private static double[] vertice(int a, int b, int c) {
         double xVertice = -(b) / (2.0 * a);
-        double yVertice = f((int) xVertice, a, b, c);
+        double yVertice = f((int) xVertice, a, b, c); 
         return new double[]{xVertice, yVertice};
     }
 
-    // Método del vértice para encontrar las raíces
-    private static double[] metodoDelVertice(int a, int b, int c, double desplazamiento, int iteraciones) {
+    private static double[] metodoVertice(int a, int b, int c, double desplazamiento, int iteraciones) {
         double[] vertice = vertice(a, b, c);
         double x0Izquierda = vertice[0] - desplazamiento;
         double x0Derecha = vertice[0] + desplazamiento;
@@ -99,14 +98,14 @@ public class Lab1P2_LloydCooperr {
         return new double[]{raizIzquierda, raizDerecha};
     }
     
-    public static int newtonRaphson(int a, int b, int c, int x, int iteraciones) {
+    public static double newtonRaphson(int a, int b, int c, double x, int iteraciones) {
         if (iteraciones == 0) {
             return x;
         } else {
             double fx = f(x, a, b, c);
             double fpx = fPrima(x, a, b);
-            double newX = x - fx / fpx;
-            return newtonRaphson(a, b, c, (int) newX, iteraciones - 1);
+            double newX = x - (fx / fpx);
+            return newtonRaphson(a, b, c, newX, iteraciones - 1);
         }
     }
     
